@@ -30,12 +30,20 @@
 5. log
    - `git log`
    - commit history를 출력
+     - `git log --oneline` 
+     - 가장 최근의 log만 출력
 
 
 
 6. remote add
    - `git remote add origin <url>`
    - 원격저장소 주소 저장
+
+
+
+7. branch
+   - `git branch name`
+   - name 이름의 branch 생성
 
 
 
@@ -56,3 +64,15 @@
 3. push
    - `git push origin master`
    - 원격저장소(github repository)에 파일 추가
+
+
+
+4. clone
+   - `git clone email@email.com` 
+   - email주소의 repository를 그대로 복사함
+
+
+
+5. pull
+   - `git pull origin master` 
+   - github의 repository의 최신 정보를 업데이트함
