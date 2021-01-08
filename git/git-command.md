@@ -43,7 +43,7 @@
 
 7. branch
    - `git branch name`
-   - name 이름의 branch 생성
+   - name 이름의 새로운 branch 생성
 
 
 
@@ -76,3 +76,12 @@
 5. pull
    - `git pull origin master` 
    - github의 repository의 최신 정보를 업데이트함
+
+
+
+### 협업
+
+1. 충돌
+   - 개발 현업에서는 다른 사람들과 깃허브 소스코드를 공유하며 협업을 하게 된다.
+   - 이때 동시에 같은 소스를 수정하는 과정에서 충돌(conflict) 가 발생할 수 있다.
+   - 이 경우에는 다른 사람들과 협의를 통해 충돌 문제를 해결해나간다.
