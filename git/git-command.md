@@ -10,12 +10,18 @@
    - `git init` : 현재 폴더를 `git`으로 관리하는 명령어 -> `.git`폴더를 생성
    - 최초 한번만 실행
 
+   
+   
 2. config
+
    - `git config --global user.email "email@email.com"`
    - `--global` 옵션과 `--local` 둘 중 하나 선택하여 사용
      - 일반적으로 global 설정을 해놓으면 내 컴퓨터에서 추가적으로 변경할 필요 없음
 
+   
+
 3. status
+
    - `git status`
    - 현재 git의 상태를 출력
 
@@ -35,7 +41,11 @@
 
 
 
-6. remote add
+6. remote
+   
+   - `git remote -v`
+   - 현재 디렉터리와 연결된 github repository 주소 확인
+   
    - `git remote add origin <url>`
    - 원격저장소 주소 저장
 
@@ -85,3 +95,21 @@
    - 개발 현업에서는 다른 사람들과 깃허브 소스코드를 공유하며 협업을 하게 된다.
    - 이때 동시에 같은 소스를 수정하는 과정에서 충돌(conflict) 가 발생할 수 있다.
    - 이 경우에는 다른 사람들과 협의를 통해 충돌 문제를 해결해나간다.
+
+
+
+### Whitespace Error
+
+- ```
+  warning: LF will be replaced by CRLF in 디렉터리내 파일명
+  solution: git config --global core.autocrlf true (--global은 선택사항)을 입력
+  ```
+
+- Mac 또는 Linux를 쓰는 개발자와 Windows를  쓰는 개발자가 Git으로 협업할때 발생한다.
+
+- Unix 시스템에서는 한 줄의 끝이 LF(Line Feed) 로 이루어지고 Windows에서는 줄 하나가  CRUF로 이루어져 있기 때문이다. 
+
+- 이를 해결하기 위해 `core.autocrlf`을 true로 만들어주면 된다.
+
+- CRUF = CR(Carriage Return), LF(Line Feed)
+
