@@ -45,9 +45,10 @@
    
    - `git remote -v`
    - 현재 디렉터리와 연결된 github repository 주소 확인
-   
    - `git remote add origin <url>`
    - 원격저장소 주소 저장
+   - `git remote set-url origin <url>`
+   - 원격저장소 주소 변경
 
 
 
