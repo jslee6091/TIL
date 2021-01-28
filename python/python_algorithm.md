@@ -61,5 +61,36 @@
 
 
 
+### Dictionary 정렬
+
+> value로 정렬
+
+- sorted(), items() 함수와 lambda 이용.
+
+- 여러 개의 tuple로 이루어진 리스트가 반환된다.
+
+- ```python
+  dict_test = {'e': 1, 'w': 3, 'q': 7, 't': 2}
+  tuple_test = sorted(dict_test.items(), key=lambda x:x[1])
+  print(tuple_test)
+  ```
+
+- ```python
+  # output - 오름차순
+  [('e',1),('t',2),('w',3),('q',7)]
+  ```
+
+- ```python
+  tuple2 = sorted(dict_test.items(), key=lambda x:x[1], reverse=True)
+  print(tuple2)
+  ```
+
+- ```python
+  # output - 내림차순
+  [('q',7),('w',3),('t',2),('e',1)]
+  ```
+
+
+
 
 
