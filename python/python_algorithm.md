@@ -61,9 +61,31 @@
 
 
 
+### Dictionary 
+
+1. 모든 key 값 조회
+
+   ```python
+   dict.keys()
+   # if idx in dict.keys() 구문으로 조회가 가능
+   ```
+
+2. 모든 value 값 조회
+
+   ```python
+   dict.values()
+   # if idx in dict.values() 구문으로 조회가 가능
+   ```
+
+
+
+
+
 ### Dictionary 정렬
 
 > value로 정렬
+
+
 
 - sorted(), items() 함수와 lambda 이용.
 

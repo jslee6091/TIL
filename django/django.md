@@ -224,7 +224,15 @@ API vs Framework vs Platform vs Library???
 
 
 - ```
-  $ drop table table_name
+  $ drop table table_name;
   ```
 
   - table 을 삭제
+
+
+
+- ```
+  $ drop table if exists table_name;
+  ```
+
+  - table_name 테이블이 있는 경우 제거하고 없으면 아무것도 안함
