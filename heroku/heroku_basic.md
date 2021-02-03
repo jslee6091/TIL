@@ -73,7 +73,12 @@
 11. heroku 사이트에서 manual deploy 클릭하면 됨
 
     - automatic deploy 기능도 있으나 manual deploy가 더 익숙함.
-    - command도 있는데 잘 모르겠음 - 현재 알아보고 있는 중
+
+    - command는 다음과 같다.
+
+      - ```
+        $ git push heroku master
+        ```
 
     
 
@@ -84,4 +89,14 @@
       ```
 
     - 스마트폰에서도 같은 주소로 접속 가능하다.
+
+
+
+13. heroku 로그아웃
+
+    - ```
+      $ heroku logout
+      ```
+
+
 
