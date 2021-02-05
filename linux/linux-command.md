@@ -101,6 +101,24 @@
 
 - 파일을 열 필요 없음
 
+- ```
+  cat file_name | grep search_word
+  ```
+
+- file_name 내의 searc_word라는 단어를 검색해서 보여줌
+
+- ```
+  $ cat /etc/group | grep cloud_user
+  ```
+
+- 유저가 속한 그룹에서 cloud_user를 검색함
+
+- ```
+  $ cat /etc/issue
+  ```
+
+- 현재 사용하고 있는 리눅스 베포판의 이름과 버전을 보여줌
+
 
 
 ### 파일/디렉토리 이동
@@ -116,6 +134,32 @@
   - ```
     $ mv dir_name/ dir_name/
     ```
+
+
+
+### groups
+
+- ```
+  $ groups
+  ```
+
+- 유저가 속한 그룹의 리스트를 보여줌
+
+
+
+### history
+
+- ```
+  $ history
+  ```
+
+- 지금까지 입력했던 명령어 기록을 보여줌
+
+- ```
+  $ history | grep search_word
+  ```
+
+- 명령어 기록중 search_word을 입력했던 기록만 보여줌
 
 
 
