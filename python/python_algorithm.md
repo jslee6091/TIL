@@ -124,5 +124,30 @@
 
 
 
+### 연속된 숫자를 입력받아 리스트에 저장하기
+
+- text file에 `12345` 가 저장되어있고 이를 입력받아 리스트에 저장하는 코드
+
+- ```python
+  list_ex = [list(map(int, list(input())))]
+  ```
+
+- text file에 다음과 같은 2차원 배열이 저장되어있고 이를 입력받아 2차원 리스트를 만드는 코드
+
+- ```python
+  # text file
+  12345
+  67890
+  24679
+  13578
+  46891
+  ```
+
+- ```python
+  list_2d_ex = [list(map(int, list(input()))) for _ in range(5)]
+  ```
+
+
+
 
 
