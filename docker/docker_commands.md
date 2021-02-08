@@ -17,35 +17,41 @@
    - 버전 확인
 
 3. ```
+   $ docker pull ubuntu:18.04
+   ```
+
+   - ubuntu 18.04 image download
+
+4. ```
    $ docker images
    ```
 
    - image 목록
 
-4. ```
-   $ docker images ls
+5. ```
+   $ docker image ls
    ```
 
    - image 목록
 
-5. ```
+6. ```
    $ docker stop container_id
    ```
 
    - id가 container_id인 container 작동 중지
 
-6. ```
+7. ```
    $ docker rm container_id
    ```
 
    - id가 container_id인 container 제거
 
-7. ```
+8. ```
    $ docker container stop container_id
    ```
 
    - id가 container_id인 container 작동 중지
-- 작동 중인 container를 제거하고자 할 때 먼저 수행해야 함
+   - 작동 중인 container를 제거하고자 할 때 먼저 수행해야 함
    
 8. ```
    $ docker container ls
@@ -64,61 +70,67 @@
     ```
 
     - id가 container_id인 container 제거
-- 제거하고자 하는 container가 여러개일 때는 container_id를 원하는 만큼 뒤에 이어서 붙이면 됨
-    -  exited된 container만 제거 가능
+    - 제거하고자 하는 container가 여러개일 때는 container_id를 원하는 만큼 뒤에 이어서 붙이면 됨
+    - exited된 container만 제거 가능
     
 11. ```
-    $ docker image rm image_id
+    $ docker image rmi image_id
     ```
 
     - id가 image_id인 image 제거
     
-12. ```
+13. ```
+    $ docker image rm -f image_id
+    ```
+
+    - ID가 image_id 인 이미지를 실행중이어도 강제로 삭제
+
+14. ```
     $ docker container run ubuntu:18.04
     ```
 
     - ubuntu:18.04 이미지를 작동시켜서 container 하나 생성 후 작동
 
-13. ```
+15. ```
     $ docker container create ubuntu:18.04
     ```
 
     - ubuntu:18.04 이미지 컨테이너 생성
 
-14. ```
+16. ```
     $ docker container run -it ubuntu:18.04 /bin/bash
     ```
 
     - container 만든 후 콘솔에 들어가서 작동시키는 명령어
     - exited 상태가 되지 않고 계속 동작중이다.
 
-15. ```
+17. ```
     $ docker container run -t ubuntu:18.04 /bin/bash
     ```
 
     - container 만든 후 콘솔에 들어가서 작동이 되지만 명령어를 입력할 수 없는 상태
     - 명령창을 하나 더 띄운 후 rm 명령어로 없애야 한다.
 
-16. ```
+18. ```
     $ docker container rm -f container_id
     ```
 
     - 작동 중인 container 강제 종료
     - 사용을 권하지는 않음
 
-17. ```
+19. ```
     $ docker container run --rm -it ubuntu:18.04 /bin/bash
     ```
 
     - container 만들어서 콘솔 창에 입력이 가능하도록 작동시킨 후 콘솔 종료 시 container 자동 제거
 
-18. ```
+20. ```
     $ docker rm container_name
     ```
 
     - container_name 으로 container 지우기
 
-19. ```
+21. ```
     $ docker run -d -p 3306:3306 -e MYSQL_ALLOW_EMPTY_PASSWORD=true --name mysql mysql:5.7
     ```
 
@@ -132,14 +144,14 @@
 
     
 
-20. ```
+22. ```
     $ docker container inspect mysql
     ```
 
     - 이름이 mysql인 container의 상세정보를 보여줌
     - docker 사용시 중요한 정보가 많다.
 
-21. ```
+23. ```
     $ docker run -d -p 33306:3306 -e MYSQL_RANDOM_ROOT_PASSWORD=true --name mysql_client_rand mysql:5.7
     ```
 
@@ -170,6 +182,62 @@
       - log를 통해 `-d`옵션을 제거했을 때 보이는 정보들을 확인할 수 있다.
 
       - 마찬가지로 중간의 `GENERATED ROOT PASSWORD` 를 확인하면 된다.
+
+24. ```
+    $ docker container run --volume C:\Users\jslee\Desktop\docker_volume:/var/lib/mysql -d -p 13306:3306 -e MYSQL_ALLOW_EMPTY_PASSWORD=true --name mysql mysql:5.7
+    ```
+
+    - docker container volume 생성
+    - 특정 디렉토리 내에서 생성하였다.
+
+25. ```
+    $ docker volume ls
+    ```
+
+    - docker volume list 보기
+
+26. prune commands
+
+    - ```
+      $ docker container prune
+      ```
+
+      - 중지된 모든 container 삭제
+
+    - ```
+      $ docker image prune
+      ```
+
+      - 이름 없는 모든 image 삭제
+
+    - ```
+      $ docker network prune
+      ```
+
+      - 사용되지 않는 network 삭제
+
+    - ```
+      $ docker volume prune
+      ```
+
+      - container에서 사용되지 않는 volume 삭제
+
+    - ```
+      $ docker system prune
+      ```
+
+      - 중지된 모든 container, image, network, volume 들을 모두 삭제
+
+27. ```
+    $ docker ps
+    ```
+
+    - 현재 실행중인 프로세스들을 모두 보여줌
+    - `-a`옵션을 추가하면 중지된 프로세스까지 보여줌
+
+28. 
+
+29. 
 
 
 
@@ -202,6 +270,14 @@ create database mydb;
 
 
 ```
+drop database mydb;
+```
+
+- mydb 이름의 DB 삭제
+
+
+
+```
 use mydb;
 ```
 
@@ -226,7 +302,7 @@ create table member(id varchar(20), name varchar(20));
 
 
 ```
-insert into member(id,name) values('data1','data2')
+insert into member(id,name) values('data1','data2');
 ```
 
 - 테이블 추가
@@ -294,3 +370,144 @@ $ mysql -h172.17.0.2 -uroot -p
 - 이때 mysql 의 주소는 mysql container의 ipaddress를 입력해야 한다.
 - 즉, mysql container의 ip 주소로 접근하는 것이다. 
 - 그러면 mysql 서버에서 만들었던 database를 확인할 수 있다.
+
+```
+$ docker container exec -it mysql /bin/bash -c mysql -h127.0.0.1 -uroot -p
+```
+
+- 위의 두 명령어를 한번에 실행하기
+- `-c` 옵션을 추가해야함
+
+
+
+
+
+### Dockerfile 생성 후 image build
+
+- ```
+  $ docker image pull ubuntu
+  ```
+
+  - 위 명령어로 ubuntu latest 버전의 image download
+
+- ```
+  $ docker image build -t fromtest:1.0 .
+  ```
+  
+- repository 이름이 fromtest 이고 TAG가1.0인 이미지를 build함
+  
+  - build 하기 전에 Dockerfile을 생성해야 한다.
+  
+- ```
+  $ docker run -it fromtest:1.0
+  ```
+
+  - fromtest 이미지를 실행
+  
+- ```
+  $ docker run -it --name frontname fromtest:1.0
+  ```
+
+  - 이미지 실행하는 프로세스의 이름을 부여할 수 있음
+
+- ```
+  $ docker run -it nodejstest:1.0 /bin/sh
+  ```
+
+  - nodejstest 이미지 실행 후 `docker exec -it container_ID /bin/sh` 명령어를 실행하는 것을 한번에 해줌
+  - /bin/bash로 해도 되는데 거의 대부분의 리눅스 버전에서 sh가 많이 있으므로 이것을 사용한다.
+- 왜 갑자기 sh를 사용하는지 자세히는 모름
+  
+- ```
+  $ docker run -p 8080:8080 -d nodejstest:1.0
+  ```
+
+  - 이미지 실행 시 인터넷 포트와 연결할때 따로 포트번호르 지정하는 명령어 
+
+
+
+### Docker 계정의 내 repository 생성 후 이미지 업로드 하기
+
+
+
+- ```
+  $ docker tag nodejstest:1.0 jslee6091/nodejstest:1.0
+  ```
+
+  - tag 와 repository 이름을 docker 사이트의 내 계정과 연결하기 위한 목적으로 지정하는 명령어
+
+- ```
+  $ docker login
+  ```
+
+  - docker 로그인 명령어 - 비밀번호 같은 정보 입력 없이 자동으로 이루어진다.
+
+- ```
+  $ docker image push jslee6091/nodejstest:1.0
+  ```
+
+  - docker 계정의 repository에 이미지를 push
+
+- ```
+  $ docker image pull jslee6091/nodejstest:1.0
+  ```
+
+  - docker 계정의 repository에 있는 이미지를 로컬로 pull
+
+- 
+
+
+
+### Ubuntu 관련 명령어
+
+- process 관련
+
+```
+$ ps -aux
+```
+
+```
+$ ps -aex
+```
+
+```
+$ ps -aef
+```
+
+```
+$ ping 127.0.0.1
+```
+
+
+
+- shell 파일 실행 관련
+
+  ```
+  /mydata/test.sh
+  ```
+
+  - mydata 디렉터리 내의 test.sh 파일 실행 명령어
+  - mydata 디렉터리에들어가서 test.sh 실행은 안됨
+
+
+
+### Dockerfile로 파이썬 실행
+
+- 임의의 python 파일 생성
+
+  - ex) test.py
+
+- Dockerfile 생성 - 파이썬 이미지 다운로드 및 명령어 실행
+
+- build과 run 실행
+
+- test.py 실행
+
+  - ```
+    python test.py
+    ```
+
+- 이미지 파일 내에서 numpy 다운 받기
+  
+  - 해당 container에 접속하여 `pip install numpy`를 실행하면 된다.
+
