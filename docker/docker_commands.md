@@ -416,8 +416,8 @@ $ docker container exec -it mysql /bin/bash -c mysql -h127.0.0.1 -uroot -p
 
   - nodejstest 이미지 실행 후 `docker exec -it container_ID /bin/sh` 명령어를 실행하는 것을 한번에 해줌
   - /bin/bash로 해도 되는데 거의 대부분의 리눅스 버전에서 sh가 많이 있으므로 이것을 사용한다.
-- 왜 갑자기 sh를 사용하는지 자세히는 모름
   
+  - 왜 갑자기 sh를 사용하는지 자세히는 모름
 - ```
   $ docker run -p 8080:8080 -d nodejstest:1.0
   ```
@@ -454,7 +454,8 @@ $ docker container exec -it mysql /bin/bash -c mysql -h127.0.0.1 -uroot -p
 
   - docker 계정의 repository에 있는 이미지를 로컬로 pull
 
-- 
+
+
 
 
 
@@ -477,6 +478,15 @@ $ ps -aef
 ```
 $ ping 127.0.0.1
 ```
+
+- ping package 설치
+
+  - ```
+    $ sudo apt-get install iputils-ping
+    ```
+
+
+
 
 
 
@@ -510,4 +520,80 @@ $ ping 127.0.0.1
 - 이미지 파일 내에서 numpy 다운 받기
   
   - 해당 container에 접속하여 `pip install numpy`를 실행하면 된다.
+
+
+
+### Dockerfile에 volume mount 하여 로컬과 연동
+
+- 로컬의 파일을 docker container에도 설치하고 실시간으로 연동하는 과정
+
+- Dockerfile에서 test.py를 volume mount 하기 위한 코드 작성
+
+- ```
+  $ docker run -v C:\Users\jslee\Desktop\docker_file:/mydata -e EXEC_FILE=test.py pythonnew
+  ```
+
+  - container에서 test.py를 실행하는 명령어
+
+- ```
+  $ docker run -v C:\Users\jslee\Desktop\docker_file:/mydata -it pythonnew /bin/bash
+  ```
+
+  - container에 접속하는 명령어
+
+- container에 접속하여 test.py를 실행할 수 있다.
+
+  - ```
+    $ python test.py
+    ```
+
+    
+
+- 로컬에서 test.py를 수정하거나 새로운 파일을 만들면 run 하지 않고 바로 container에서 변경 사항이 반영된다.
+
+
+
+### Docker Network
+
+- ```
+  $ docker network ls
+  ```
+
+  - docker에 설치되어있는 네트워크 리스트
+
+- ```
+  $ docker network create network_name
+  ```
+
+  - 새로운 네트워크 만들기
+
+- ```
+  $ docker network connect network_name process_name
+  ```
+
+  - network에 process를 연결한다. (process = container)
+
+- inspect 명령어로 네트워크 ip 정보들을 확인하여 process 와 연결할 수 있다.
+
+- ```
+  $ docker network disconnect network_name process_name
+  ```
+
+  - process와 network의 연결 끊기
+
+- mysql 이미지를 run 할때 네트워크와 연결시키기
+
+  - ```
+    $ docker run -d -p 13306:3306 -e MYSQL_ALLOW_EMPTY_PASSWORD=true --name mysql_client --network my-network mysql:5.7
+    ```
+
+  - `--network network_name` 옵션을 추가해야한다.
+
+  - 이때 직접 만든 network에 연결하고 그 이후 network를 삭제하면 어느 곳도 연결된 곳이 없는 상태가 된다.
+
+  - 이를 bridge에 연결하면 된다.
+
+  - ```
+    $ docker network connect bridge process_name
+    ```
 
