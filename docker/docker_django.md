@@ -120,3 +120,31 @@
   
 
 - Dockerfile에서 직접 설치와 실행을 하도록 하는 것이 편리하다. 왜냐하면 2번째 방법은 매번 이미지를 build 할 때마다 수작업으로 설치를 진행하는 번거로움이 있기 때문이다.
+
+
+
+
+
+### Django & MySQL
+
+- ```
+  $ docker network create network_name
+  ```
+
+- ```
+  $ docker build -t mydjango .
+  ```
+
+- ```
+  $ docker run -d -p 3306:3306 -e MYSQL_ALLOW_EMPTY_PASSWORD=true -e MYSQL_DATABASE=mydb --network djangomysql mydjango:latest
+  ```
+
+- ```
+  $ docker run -d -p 8000:8000 --network djangomysql -it mydjango:latest
+  ```
+
+- ```
+  $ docker exec -it mysql /bin/bash
+  ```
+
+- 
