@@ -149,5 +149,28 @@
 
 
 
+### 리스트의 특정 위치에 데이타 삽입
+
+- python list의 *insert 함수*를 이용한다.
+
+- ```python
+  # insert(index, data)
+  ```
+
+- ```python
+  test = [1,2,3,4,5]
+  print(test)
+  test.insert(3,55)
+  print(test)
+  ```
+
+- ```python
+  # output
+  [1, 2, 3, 4, 5]
+  [1, 2, 3, 55, 4, 5]
+  ```
+
+
+
 
 
