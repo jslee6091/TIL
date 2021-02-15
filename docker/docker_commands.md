@@ -184,19 +184,33 @@
       - 마찬가지로 중간의 `GENERATED ROOT PASSWORD` 를 확인하면 된다.
 
 24. ```
+    $ docker run -d -p 3306:3306 -e MYSQL_ROOT_PASSWORD=secret -e MYSQL_DATABASE=mydb --name mysql mysql:5.7
+    ```
+
+    - 특정 password를 지정하여 mysql 생성
+    - `MYSQL_ROOT_PASSWORD=secret`으로 옵션을 지정하면 이후 mysql에 접속시 password가 secret이 된다.
+
+25. ```
     $ docker container run --volume C:\Users\jslee\Desktop\docker_volume:/var/lib/mysql -d -p 13306:3306 -e MYSQL_ALLOW_EMPTY_PASSWORD=true --name mysql mysql:5.7
     ```
 
     - docker container volume 생성
+    - 로컬의 데이터와 컨테이너가 실시간으로 연동할 수 있다.
     - 특정 디렉토리 내에서 생성하였다.
 
-25. ```
+26. ```
     $ docker volume ls
     ```
 
     - docker volume list 보기
 
-26. prune commands
+27. ```
+    $ docker volume rm volume_id
+    ```
+
+    - 특정 volume 제거
+
+28. prune commands
 
     - ```
       $ docker container prune
@@ -228,16 +242,12 @@
 
       - 중지된 모든 container, image, network, volume 들을 모두 삭제
 
-27. ```
+29. ```
     $ docker ps
     ```
 
     - 현재 실행중인 프로세스들을 모두 보여줌
     - `-a`옵션을 추가하면 중지된 프로세스까지 보여줌
-
-28. 
-
-29. 
 
 
 

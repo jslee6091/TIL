@@ -136,7 +136,7 @@
   ```
 
 - ```
-  $ docker run -d -p 3306:3306 -e MYSQL_ALLOW_EMPTY_PASSWORD=true -e MYSQL_DATABASE=mydb --network djangomysql mydjango:latest
+  $ docker run -d -p 3306:3306 -e MYSQL_ALLOW_EMPTY_PASSWORD=true -e MYSQL_DATABASE=mydb --network djangomysql mysql:5.7
   ```
 
 - ```
@@ -148,3 +148,4 @@
   ```
 
 - 
+
