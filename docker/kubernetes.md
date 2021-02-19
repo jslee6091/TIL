@@ -96,5 +96,149 @@
     - master에 접속한 node 들의 목록 확인
     - node 들이 master에 연결되어있기 때문에 master에서 사용해야한다.
 
-12. 
+12. ```
+    $ kubectl describe pod pod_name
+    ```
+
+    - pod_name 의 더 자세한 정보 확인
+
+
+
+### node 실행 후 STATUS = Ready 상태로 만들기
+
+> master에서 get node 명령어로 확인
+
+1. ```
+   $ systemctl status kubelet
+   ```
+
+   - 우선 kubelet이 활성화 되어있는지 확인한다.
+
+2. ```
+   $ systemctl start kubelet
+   ```
+
+   - 비활성화 되어있다면 활성화시킨다. 
+
+3. ```
+   $ kubectl get node
+   ```
+
+   - master에서 이 명령어를 실행하여 node 의 STATUS 가 Ready 상태로 된 것을 확인한다.
+
+
+
+
+### yaml 파일 다운받기
+
+
+
+```
+$ kubectl get services -o yaml > nginx-service.yml
+```
+
+- nginx-service.yml 파일을 다운받음
+- 
+
+
+
+### yml파일을 이용한  pod 생성
+
+1. 리눅스에 nodejs 설치
+
+   ```
+   $ yum install epel-release
+   $ yum install -y gcc-c++ make
+   $ curl -sL https://rpm.nodesource.com/setup_12.x | sudo -E bash -
+   $ yum install nodejs
+   ```
+
+   
+
+2. hello.js 작성 후 실행
+
+   ```
+   $ node hello.js
+   ```
+
+3. Dockerfile 작성
+
+4. 도커 이미지 빌드
+
+   ```
+   $ docker build -t jslee6091/hello .
+   ```
+
+5. 도커 이미지 실행
+
+   ```
+   $ docker run -d -p 8001:8000 jslee6091/hello
+   ```
+
+6. 도커 허브에 올리기
+
+   ```
+   $ docker push jslee6091/hello
+   ```
+
+7. yml 작성
+
+   ```
+   $ vi my_hello_pod.yml
+   ```
+
+8. pod 생성
+
+   ```
+   $ kubectl create -y my_hello_pod.yml 
+   또는
+   $ kubectl apply -f my_hello_pod.yml
+   ```
+
+9. 생성된 container에 들어가서 curl을 통한 확인
+
+   ```
+   $ kubectl exec -it hello-pod /bin/bash
+   # hello-pod는 pod 이름
+   ```
+
+10. container에서 curl 실행
+
+    ```
+    $ apt-get update 
+    $ apt-get install -y curl
+    ```
+
+11. 생성된 파일 지우기 (필요시 사용)
+
+    ```
+    $ kubectl delete pod hello-pod
+    ```
+
+    
+
+### yml파일을 이용한  서비스 생성
+
+1. yml 파일 생성
+
+2. apply
+
+   ```
+   $ kubectl apply -f my_hello_pod.yml
+   ```
+
+3. port 확인
+
+   ```
+   $ docker get svc -o wide
+   ```
+
+4. curl로 확인
+
+   ```
+   $ curl -X GET http://127.0.0.1:8001
+   $ curl -X GET http://127.0.0.1:31775
+   ```
+
+   - 31775는 바뀔 수 있음
 
