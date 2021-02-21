@@ -240,7 +240,73 @@
   [1,2,3,5]
   ```
 
+
+
+
+
+
+### 정수 문자열을 리스트로 변환
+
+> 정수를 원소로 하는 리스트
+
+- list()와 map() 활용
+
+- ```python
+  # ex
+  a = "100"
+  print(a, type(a))
+  
+  b = list(map(int, list(a)))
+  print(b, type(b[0]))
+  ```
+
+- ```python
+  # output
+  100 <class 'str'>
+  [1,0,0] <class 'int'>
+  ```
+
+- 만약 a = "011"인 경우에는 [0,1,1]로 변환된다.
+
+
+
+
+
+### 순열(permutation)과 문자열
+
+> 길이가 n인 문자열 중 n이하의 개수를 뽑는 순열
+
+
+
+- 직접 구현하는 방법도 있지만 코드의 길이가 매우 길다.
+
+- 따라서 itertools 모듈의 permutations 함수를 사용하면 된다.
+
+- ```python
+  from itertools import permutations
+  
+  a = "102"
+  b = permutations(a, 2)
+  c = list(b)
+  print('b is ', b)
+  print('c is ', c)
+  for j in c:
+      d = ''.join(j)
+      print(d)
+  ```
+
+- ```python
+  # output
+  b is  <itertools.permutations object at 0x000001BD1C773770>
+  c is  [('1', '0'), ('1', '2'), ('0', '1'), ('0', '2'), ('2', '1'), ('2', '0')]
+  10
+  12
+  01
+  02
+  21
+  20
+  
+  ```
+
 - 
-
-
 
