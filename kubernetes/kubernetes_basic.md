@@ -101,6 +101,12 @@
     ```
 
     - pod_name 의 더 자세한 정보 확인
+    
+13. ```
+    $ kubectl explain pods
+    ```
+
+    - pods에 대한 설명
 
 
 
@@ -194,6 +200,8 @@ $ kubectl get services -o yaml > nginx-service.yml
    또는
    $ kubectl apply -f my_hello_pod.yml
    ```
+
+   - yml에 작성된 내용에 맞게 쿠버네티스 객체를 생성한다.
 
 9. 생성된 container에 들어가서 curl을 통한 확인
 
