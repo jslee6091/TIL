@@ -310,3 +310,48 @@
 
 - 
 
+
+
+
+
+### 문자열이 포함된 리스트 거꾸로 뒤집기
+
+- reversed()와 list() 이용
+
+- ```python
+  # ex1 - string
+  a = 'hello'
+  b = list(reversed(a))
+  print(b)
+  ```
+
+- ```python
+  # output
+  ['o', 'l', 'l', 'e', 'h']
+  ```
+
+- ```python
+  # ex2 - list
+  a = ['h', 'e', 'l', 'l', 'o']
+  b = list(reversed(a))
+  print(b)
+  ```
+
+- ```python
+  # output
+  ['o', 'l', 'l', 'e', 'h']
+  ```
+
+- ```python
+  # ex3 - list() 안했을 때
+  a = 'hello'
+  b = reversed(a)
+  print(b)
+  ```
+
+- ```python
+  # output
+  <reversed object at 0x00000223317D1220>
+  ```
+
+- 
