@@ -177,7 +177,7 @@
 - `*`사용
 
 - ```python
-  # ex
+  # ex1
   a = [1,2,3,4,5]
   print(a)
   print(*a)
@@ -188,6 +188,26 @@
   [1,2,3,4,5]
   1 2 3 4 5
   ```
+  
+  
+  
+- asterisk는 print에서 변수 하나만 입력이 가능하다. 즉, 다음과 같은 문장은 SyntaxError가 발생한다.
+
+- ```python
+  # ex2
+  a = [1,2,3,4,5]
+  print(f'#{test_case} {*a}')
+  b = *a
+  print(b)
+  ```
+
+- ```python
+  # output
+  SyntaxError: cannot use starred expression here
+  -> 두 print 문 모두 Syntax Error 발생
+  ```
+
+- 결론적으로 asterisk 는 변수 삽입이 불가하고 print 안에서 다른 변수와 함께 출력이 되는 것도 불가능하다.
 
 
 
