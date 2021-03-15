@@ -130,8 +130,10 @@
 
 - ```python
   list_ex = [list(map(int, list(input())))]
+  # 또는
+list_ex = [list(map(int, input()))]
   ```
-
+  
 - text file에 다음과 같은 2차원 배열이 저장되어있고 이를 입력받아 2차원 리스트를 만드는 코드
 
 - ```python
@@ -145,7 +147,16 @@
 
 - ```python
   list_2d_ex = [list(map(int, list(input()))) for _ in range(5)]
+  # 또는
+  list_2d_ex = [list(map(int, input())) for _ in range(5)]
   ```
+
+- ```python
+  # output
+  [[1,2,3,4,5],[6,7,8,9,0],[2,4,6,7,9],[1,3,5,7,8],[4,6,8,9,1]]
+  ```
+
+
 
 
 
@@ -247,7 +258,7 @@
 - 특정 위치의 데이터 삭제 후 뒤의 데이터들이 한칸씩 앞으로 당겨진다.
 
 - ```python
-  # ex
+  # ex 1
   a = [1,2,3,4,5]
   print(a)
   del a[3]
@@ -260,7 +271,23 @@
   [1,2,3,5]
   ```
 
+- 리스트 슬라이싱을 활용하여 한번에 여러 개의 데이터를 삭제할 수 있다.
 
+- ```python
+  # ex 2
+  a = [1,2,3,4,5]
+  print(a)
+  del a[1:3] # 인덱스 1,2의 원소가 삭제됨
+  print(a)
+  ```
+
+- ```python
+  # output
+  [1,2,3,4,5]
+  [1,4,5]
+  ```
+
+- 
 
 
 
@@ -372,6 +399,35 @@
 - ```python
   # output
   <reversed object at 0x00000223317D1220>
+  ```
+
+
+
+
+
+
+### 리스트에 특정값이 있는지 확인
+
+- `if element in list` 활용
+
+- ```python
+  # ex
+  a = [1,2,3,4,5]
+  if 3 in a:
+      print('yes')
+  else:
+      print('no')
+  
+  if 7 in a:
+      print('yes')
+  else:
+      print('no')
+  ```
+
+- ```python
+  # output
+  yes
+  no
   ```
 
 - 
