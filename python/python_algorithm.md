@@ -355,7 +355,16 @@ list_ex = [list(map(int, input()))]
   
   ```
 
-- 
+- ```python
+  a = [2,3]
+  b = list(permutations(a))
+  print(b)
+  ```
+
+- ```python
+  # output
+  [(2,3), (3,2)]
+  ```
 
 
 
