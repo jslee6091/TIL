@@ -250,3 +250,12 @@ $ kubectl get services -o yaml > nginx-service.yml
 
    - 31775는 바뀔 수 있음
 
+
+
+
+
+```
+$ kubectl annotate deployment/echo kubernetes.io/change-cause="not exists environment variables"
+```
+
+- ???
