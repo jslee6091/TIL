@@ -320,7 +320,7 @@ insert into member(id,name) values('data1','data2');
 
 
 ```
-select * from member
+select * from member;
 ```
 
 - member table의 정보를 모두 선택

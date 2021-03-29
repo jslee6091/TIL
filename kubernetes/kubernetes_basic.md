@@ -259,3 +259,11 @@ $ kubectl annotate deployment/echo kubernetes.io/change-cause="not exists enviro
 ```
 
 - ???
+
+
+
+```
+$ kubectl get pods -o=custom-columns='NameSpec:.metadata.namespace, Name:.metadata.name, Containers:.spec.containers[*].name'
+```
+
+- ???
