@@ -77,6 +77,16 @@
    # if idx in dict.values() 구문으로 조회가 가능
    ```
 
+3. Key를 이용하여 value 값 조회
+
+   ```python
+   # Key가 'item'인 경우 해당하는 Value 반환
+   # 'item'인 Key가 없는 경우 None 반환
+   dict.get('item')
+   # 'item'인 Key가 없는 경우 None 대신 0을 반환
+   dict.get('item', 0)
+   ```
+
 
 
 
@@ -503,4 +513,38 @@ list_ex = [list(map(int, input()))]
   [[2, 14], [2, 7], [5, 21], [7, 15], [9, 24], [11, 15], [13, 22], [13, 19], [13, 16], [16, 22], [17, 21], [18, 19], [20, 24], [20, 23], [23, 24]]
   ```
 
-- 
+
+
+
+
+
+### Deque
+
+> Queue와 Stack의 혼합형태
+
+
+
+- 자료의 앞, 뒤 양쪽 방향에서 element를 추가하거나 삭제할 수 있는 자료구조
+
+- Queue와 Stack에 사용되는 List에 비해 훨씬 빠르다.
+
+  - List : O(n)
+  - Deque : O(1)
+
+- 간단한 사용법
+
+  - ```python
+    from collections import deque
+    
+    deque.append(item) # item을 오른쪽에서 삽입
+    deque.appendleft(item) # item을 왼쪽에서 삽입
+    deque.pop() # 가장 오른쪽 요소를 제거 후 가져옴
+    deque.popleft() # 가장 왼쪽 요소를 제거 후 가져옴
+    deque.extend(array) # array를 오른쪽에 추가
+    deque.extendleft(array) # array를 왼쪽에 추가
+    deque.remove(item) # item을 제거
+    deque.rotate(num) # deque를 num 만큼 회전 (num이 양수면 오른쪽, 음수면 왼쪽)
+    ```
+
+
+

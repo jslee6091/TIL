@@ -407,9 +407,11 @@ $ ansible nginx -m yum -a "name=httpd state=present" -k
      $ vagrant provision ansible-server
      ```
 
-   - ansible  centos -m ping
+   - `$ ansible centos -m ping`
 
-   - ansible ubuntu -m ping
+   - `$ ansible ubuntu -m ping`
+   
+   - 두 명령어가 오류 없이 실행되기 위해서는 `ssh-copy-id vagrant@ansible-node01`과 `ssh-copy-id vagrant@ansible-node03`을 해줘야 한다. (node01은 centos, node03은 ubuntu)
 
 
 
@@ -472,7 +474,7 @@ $ ansible nginx -m yum -a "name=httpd state=present" -k
         - name: upload default index.html for web server
           get_url: url=https://www.nginx.com dest=/usr/share/nginx/html/
         - name: start nginx web server
-          yum: name=nginx state=started
+          service: name=nginx state=started
     ```
 
   - `ansible-playbook nginx_install.yml -k`
@@ -511,7 +513,7 @@ $ ansible nginx -m yum -a "name=httpd state=present" -k
         - name: install nginx web server
           apt: pkg=nginx state=present update_cache=yes
         - name: upload default index.html for web server
-          get_url: url=https://www.apache.com dest=/usr/share/nginx/html/
+          get_url: url=http://www.apache.com dest=/usr/share/nginx/html/
         - name: start nginx web server
           service: name=nginx state=started
     ```
@@ -519,6 +521,10 @@ $ ansible nginx -m yum -a "name=httpd state=present" -k
   - `ansible-playbook nginx_install.yml -k`
 
   - 원래 ubuntu 에도 nginx 를 설치하려 했으나 오류가 발생하여 apache로 변경함
+  
+  - apache는 https 가 아닌 http 로 접속한다.
+  
+    - https 로 접속하려 했으나 443 오류 발생, 접근이 불가능하다.
 
 
 
