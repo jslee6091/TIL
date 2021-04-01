@@ -58,6 +58,14 @@
 
 
 
+8. branch 변경
+   - `git check branch_name`
+   - branch_name인 branch로 변경함
+
+
+
+
+
 ### 저장
 
 1. add
