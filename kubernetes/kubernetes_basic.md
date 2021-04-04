@@ -91,11 +91,13 @@
 
 11. ```
     $ kubectl get nodes
+    또는
+$ kubectl get no
     ```
-
-    - master에 접속한 node 들의 목록 확인
+    
+- master에 접속한 node 들의 목록 확인
     - node 들이 master에 연결되어있기 때문에 master에서 사용해야한다.
-
+    
 12. ```
     $ kubectl describe pod pod_name
     ```
@@ -107,6 +109,12 @@
     ```
 
     - pods에 대한 설명
+    
+14. ```
+    $ kubectl api-resources
+    ```
+
+    - kubernetes에서 사용 가능한 api resource 들을 확인한다.
 
 
 
@@ -144,7 +152,8 @@ $ kubectl get services -o yaml > nginx-service.yml
 ```
 
 - nginx-service.yml 파일을 다운받음
-- 
+
+
 
 
 
