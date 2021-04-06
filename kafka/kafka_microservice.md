@@ -376,6 +376,7 @@
         def get(self):
             parser = reqparse.RequestParser()
             
+            # Query String
             # GET /api/multiply?param1=3&param2=4
             parser.add_argument('param1')
             parser.add_argument('param2')
@@ -938,3 +939,5 @@
      ```
 
    - 실행 결과 위와 같은 데이터가 출력된다.
+   
+   - 하지만 DB에 insert 하지 않았기 때문에 Mariadb에서는 데이터가 저장되지 않는다.

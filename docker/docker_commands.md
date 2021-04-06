@@ -315,7 +315,7 @@ create table member(id varchar(20), name varchar(20));
 insert into member(id,name) values('data1','data2');
 ```
 
-- 테이블 추가
+- 테이블에 데이터 삽입
 
 
 
