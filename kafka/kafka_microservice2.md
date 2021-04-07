@@ -369,17 +369,19 @@
     import threading
     from datetime import datetime
     
+    ```
+  
   consumer = KafkaConsumer('new_orders',
                              bootstrap_servers=["localhost:9092"],
                              auto_offset_reset='earliest',
                              enable_auto_commit=True,
                              auto_commit_interval_ms=1000,
                              consumer_timeout_ms=1000)
-    
+  
   def fetch_latest_orders(next_call_in):
         # 5초에 한번씩 가져오기
         next_call_in += 5
-    
+  
       # consumer의 데이터 읽어오는 함수 poll
         batch = consumer.poll(timeout_ms=100)
         if len(batch) > 0:
@@ -387,11 +389,14 @@
                 print(message)
         
         threading.Timer(next_call_in - time.time(), fetch_latest_orders, [next_call_in]).start()
-    
+  
   next_call_in = time.time()
     fetch_latest_orders(next_call_in)
+  
     ```
-    
+  
+    ```
+  
 - 코드 실행하면 아무것도 실행을 안함
   
 - postman 에서 데이터를 POST 방식으로 send 하면 바로 데이터가 뜬다.
@@ -409,25 +414,33 @@
   
   - ```python
     
-    ```
+  ```
   # kafka_consumer.py 의 batch 에 대한 if 구문을 다음과 같이 수정
     if len(batch) > 0:
     	for message in list(batch.values())[0]:
         	value = message.value.decode()
             order_dict = json.loads(value) # json -> dict
           print(order_dict["ordered_at"])
+  
+  ```
+  
   ```
   
 - 코드 실행 
   
     - postman에서 데이터를 전송한 시간이 출력된다.
-  
+    
     - 실행 중 postman에서 POST 방식으로 메시지를 다시 전송하면 그 시간이 바로 출력된다.
-  
+    
     - ```
+      
+      ```
     # 실행 결과
       2021-04-06 13:52:13.596638
       2021-04-06 13:55:28.127564
+    
+    ```
+    
     ```
 
 
@@ -737,4 +750,6 @@
       ```
 
     - `COMPLETED` 말고 `CANCELED` 등 다른 값도 입력 가능
+    
+    - 내가 만든 코드는 데이터는 제대로 PUT이 되는데 postman 에서는 왜 null이 뜨는지 잘 모르겠다.
 
