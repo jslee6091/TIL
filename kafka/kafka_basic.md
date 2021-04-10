@@ -196,6 +196,8 @@
 
 
 
+##### DB 테이블 생성
+
 - 로컬의 MariaDB에 접속 후 mydb database 생성
 
 - 다음과 같은 쿼리문 작성
@@ -213,6 +215,8 @@
   - users 테이블이 생성됨
 
 
+
+##### kafka connect를 위한 설치 및 환경 설정
 
 - confluent 설치
 
@@ -241,26 +245,61 @@
     ```
 
   - Install the connector manually 의 zip file 다운로드를 클릭하면 나오는 웹 페이지에서 다운로드 실행
+  
+  - `unzip jdbc파일` 명령어로 압축 해제 하면 `confluentinc-kafka-connect-jdbc-10.1.0` 디렉터리가 생김
 
 
 
 - kafka Connect 실행
 
+  - ```
+    ./bin/windows/connect-distributed.bat ./etc/kafka/connect-distributed.properties
+    ```
+
+  - `confluent-6.1.0` 디렉터리에서 실행
+
+  - 아래와 같은 오류가 발생한다.
+
+  - ```
+    Classpath is empty. Please build the project first e.g. by running 'gradlew jarAll'
+    ```
+
+  - 오류 해결을 위해 코드를 수정한다.
+
+  - ```
+    $ code bin/windows/kafka-run-class.bat
+    ```
+
+  - ```
+    # rem Classpath addition for core 바로 위쪽에 코드 추가
+    
+    rem classpath addition for LSB style path
+    if exist %BASE_DIR%\share\java\kafka\* (
+    	call:concat %BASE_DIR%\share\java\kafka\*
+    )
+    ```
+
+  - 추가적으로 다음과 같이 jar 파일을 옮기고 plugin.path 코드를 수정한다.
+
+  - `mariadb-java-client-2.7.2.jar` 파일을 복사하여 `confluent-6.1.0/share/java/kafka` 에 붙여넣기
+
+  - terminal 에서 `$ code etc/kafka/connect-distributed.properties` 입력하여 코드 수정
+
+  - ```properties
+    # 맨 밑에 아래 구문 추가
+    # 기존의 plugin.path 문장은 주석 처리
+    plugin.path=\C:\\confluentinc-kafka-connect-jdbc-10.1.0\\lib
+    ```
 
 
-- `mariadb-java-client-2.7.2.jar` 파일을 복사하여 `confluent-6.1.0/share/java/kafka` 에 붙여넣기
-
-- terminal 에서 `$ code etc/kafka/connect-distributed.properties` 입력하여 코드 수정
-
-- ```python
-  # 맨 밑에 아래 구문 추가
-  # 기존의 plugin.path 문장은 주석 처리
-  plugin.path=\C:\\confluentinc-kafka-connect-jdbc-10.1.0\\lib
-  ```
 
 
 
-- Kafka Source Connect 추가 (MariaDB)
+##### Kafka Source Connect 추가
+
+
+
+- Kafka Source Connect를 MariaDB와 연동시키기
 
   - kafka topic을 생성한다.
 
@@ -338,7 +377,9 @@
 
 
 
-- sink connect 추가
+##### Kafka Sink Connect 추가
+
+
 
 - sink connect는 kafka topic에 저장된 데이터를 다른 DB 테이블에 저장하는 기능을 수행한다.
 
