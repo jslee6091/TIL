@@ -241,9 +241,8 @@
     $ python order_ms.py
     ```
 
-  - 
-
   - kafka의 topic에 데이터를 입력
+
 
 
 
@@ -369,81 +368,61 @@
     import threading
     from datetime import datetime
     
-    ```
-  
-  consumer = KafkaConsumer('new_orders',
-                             bootstrap_servers=["localhost:9092"],
-                             auto_offset_reset='earliest',
-                             enable_auto_commit=True,
-                             auto_commit_interval_ms=1000,
-                             consumer_timeout_ms=1000)
-  
-  def fetch_latest_orders(next_call_in):
-        # 5초에 한번씩 가져오기
+    consumer = KafkaConsumer('new_orders',
+                               bootstrap_servers=["localhost:9092"],
+                               auto_offset_reset='earliest',
+                               enable_auto_commit=True,
+                               auto_commit_interval_ms=1000,
+                               consumer_timeout_ms=1000)
+    
+    def fetch_latest_orders(next_call_in):
+    	# 5초에 한번씩 가져오기
         next_call_in += 5
-  
-      # consumer의 데이터 읽어오는 함수 poll
-        batch = consumer.poll(timeout_ms=100)
+        # consumer의 데이터 읽어오는 함수 poll
+      	batch = consumer.poll(timeout_ms=100)
         if len(batch) > 0:
             for message in list(batch.values())[0]:
                 print(message)
-        
-        threading.Timer(next_call_in - time.time(), fetch_latest_orders, [next_call_in]).start()
-  
-  next_call_in = time.time()
+      
+    	threading.Timer(next_call_in - time.time(), fetch_latest_orders, [next_call_in]).start()
+    
+    next_call_in = time.time()
     fetch_latest_orders(next_call_in)
-  
     ```
   
-    ```
+  - 코드 실행하면 아무것도 실행을 안함
   
-- 코드 실행하면 아무것도 실행을 안함
-  
-- postman 에서 데이터를 POST 방식으로 send 하면 바로 데이터가 뜬다.
+  - postman 에서 데이터를 POST 방식으로 send 하면 바로 데이터가 뜬다.
   
   - ```
-      
+    # 데이터 수신 결과
+      ConsumerRecord(topic='new_orders', partition=0, offset=0, timestamp=1617684733599, timestamp_type=0, key=None, value=b'{"coffee_name": "jason", "coffee_price": 4000, "coffee_qty": 8, "user_id": "USER0001", "order_id": "6c1de1e2-8921-4447-a3b9-bf7a062dd598", "ordered_at": "2021-04-06 13:52:13.596638"}', headers=[], checksum=None, serialized_key_size=-1, serialized_value_size=182, serialized_header_size=-1)
       ```
-  # 데이터 수신 결과
-    ConsumerRecord(topic='new_orders', partition=0, offset=0, timestamp=1617684733599, timestamp_type=0, key=None, value=b'{"coffee_name": "jason", "coffee_price": 4000, "coffee_qty": 8, "user_id": "USER0001", "order_id": "6c1de1e2-8921-4447-a3b9-bf7a062dd598", "ordered_at": "2021-04-06 13:52:13.596638"}', headers=[], checksum=None, serialized_key_size=-1, serialized_value_size=182, serialized_header_size=-1)
-  ```
-  
-  
   
   - 메시지가 전송되는 시간을 출력하는 코드
   
-  - ```python
-    
-  ```
-  # kafka_consumer.py 의 batch 에 대한 if 구문을 다음과 같이 수정
+  - ````python
+    # kafka_consumer.py 의 batch 에 대한 if 구문을 다음과 같이 수정
     if len(batch) > 0:
-    	for message in list(batch.values())[0]:
-        	value = message.value.decode()
+      	for message in list(batch.values())[0]:
+          	value = message.value.decode()
             order_dict = json.loads(value) # json -> dict
-          print(order_dict["ordered_at"])
+            print(order_dict["ordered_at"])
+    ````
   
-  ```
+  - 코드 실행 
   
-  ```
+  - postman에서 데이터를 전송한 시간이 출력된다.
   
-- 코드 실행 
+  - 실행 중 postman에서 POST 방식으로 메시지를 다시 전송하면 그 시간이 바로 출력된다.
   
-    - postman에서 데이터를 전송한 시간이 출력된다.
-    
-    - 실행 중 postman에서 POST 방식으로 메시지를 다시 전송하면 그 시간이 바로 출력된다.
-    
-    - ```
-      
-      ```
+  - ```
     # 실행 결과
-      2021-04-06 13:52:13.596638
-      2021-04-06 13:55:28.127564
-    
+    2021-04-06 13:52:13.596638
+    2021-04-06 13:55:28.127564
     ```
-    
-    ```
-
-
+  
+  
 
 
 - kafka로 데이터베이스의 delivery_status 테이블에 데이터 넣기

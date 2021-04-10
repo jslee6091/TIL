@@ -276,20 +276,18 @@
         app.run(port=6000)
     ```
 
-  - 
-
   - network 옵션과 함께 다시 생성
 
   - ```
-    $ docker run -d -p 16000:6000 --network my-coffee-network --name delivery_ms jslee6091/flask_delivery_ms
+  $ docker run -d -p 16000:6000 --network my-coffee-network --name delivery_ms jslee6091/flask_delivery_ms
     ```
-
+  
   - 기존에 실행했던 mysql 컨테이너도 종료하고 network 옵션과 함께 다시 생성
 
   - ```
-    $ docker run -d -p 13306:6000 -e MYSQL_ALLOW_EMPTY_PASSWORD=true --network my-coffee-network --name mydb mysql:5.7
+  $ docker run -d -p 13306:6000 -e MYSQL_ALLOW_EMPTY_PASSWORD=true --network my-coffee-network --name mydb mysql:5.7
     ```
-
+  
   - postman 에서 GET 방식으로 send 하면 아무 데이터도 전송되지 않음 (docker로 만든 mysql 데이터베이스에 아무런 데이터가 없으므로)
 
 
@@ -420,9 +418,6 @@
      $ docker run -d -p 15000:6000 --network my-coffee-network --name order_ms jslee6091/flask_order_ms
      ```
 
-   - 
-
-
 
 
 
@@ -510,7 +505,6 @@
      $ docker run -d --network my-coffee-network --name kafka_consumer jslee6091/kafka_consumer_ms
      ```
 
-   - 
 
 
 
