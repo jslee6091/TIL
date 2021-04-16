@@ -64,6 +64,10 @@
 
 
 
+9. branch 조회
+   - `git branch`
+   - 현재 생성되어있는 branch 목록 조회
+
 
 
 ### 저장
