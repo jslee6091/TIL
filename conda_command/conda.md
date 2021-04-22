@@ -2,7 +2,7 @@
 
 - anaconda 가상환경 목록
 
-  `$ conda info --evns` 
+  `$ conda info --envs` 
 
 - anaconda 가상환경 생성
 

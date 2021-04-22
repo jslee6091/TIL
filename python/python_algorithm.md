@@ -548,3 +548,57 @@ list_ex = [list(map(int, input()))]
 
 
 
+### 리스트 내 문자열 정렬
+
+- `sorted()` 또는 `sort()` 이용
+
+- ```python
+  a = ['ae', 'bx', 'tl', 'cpoi', 'xwtd', 'dx', 'dzd', 'dfg']
+  a.sort(key=lambda x: x)
+  print(a)
+  ```
+
+- ```
+  # output
+  ['ae', 'bx', 'cpoi', 'dfg', 'dx', 'dzd', 'tl', 'xwtd']
+  ```
+
+- 비교하려는 자리의 문자가 같은 경우 그 다음 자리의 문자를 비교하여 정렬한다.
+
+
+
+
+
+### 리스트 원소의 중복 없애기
+
+- `set` 이용
+
+- ```python
+  a = [1,2,3,4,5,5,5,3]
+  print(a)
+  ```
+
+- ```
+  [1, 2, 3, 4, 5, 5, 5, 3]
+  ```
+
+- ```
+  b = set(a)
+  print(b, type(b))
+  ```
+
+- ```
+  {1, 2, 3, 4, 5} <class 'set'>
+  ```
+
+- ```
+  c = list(b)
+  print(c, type(c))
+  ```
+
+- ```
+  [1, 2, 3, 4, 5] <class 'list'>
+  ```
+
+
+

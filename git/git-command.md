@@ -59,7 +59,7 @@
 
 
 8. branch 변경
-   - `git check branch_name`
+   - `git checkout branch_name`
    - branch_name인 branch로 변경함
 
 

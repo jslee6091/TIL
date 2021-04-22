@@ -42,7 +42,7 @@
 
 
 
-### 실습
+### Flask Basic
 
 1. anaconda prompt 실행
 
@@ -334,7 +334,7 @@
 
 
 
-### 커피 주문 Microservice에 대한 힌트
+### 커피 주문 Microservice
 
 - 새로운 작업 디렉터리 생성하여 코드를 작성
 

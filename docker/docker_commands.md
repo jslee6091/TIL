@@ -327,6 +327,30 @@ select * from member;
 
 
 
+```
+drop table member;
+```
+
+- member table을 삭제
+
+
+
+```
+alter table member change name myname varchar(20);
+```
+
+- member 테이블의 name 칼럼의 이름을 varchar 타입의 myname으로 변경
+
+
+
+```
+select column_name from table_name where column_name2 = data
+```
+
+- `table_name` 테이블에서 `column_name2` 의 데이터가 `data` 인 행의 column 들 중 `column_name` 의 데이터를 추출
+
+
+
 - Port Error Solution
 
 - ```
