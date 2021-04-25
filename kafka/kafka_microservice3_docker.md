@@ -216,7 +216,7 @@
     api = flask_restful.Api(app)
     
     config = {
-        'host': '172.19.0.2', # 수정한 부분 - mysql의 IPv4 주소로 변경
+        'host': '172.19.0.3', # 수정한 부분 - mysql의 IPv4 주소로 변경
         'port': 3306,
         'user': 'root',
         'password': '', # EMPTY 이므로 공백
@@ -329,7 +329,7 @@
      api = flask_restful.Api(app)
      
      config = {
-         'host': '172.19.0.1', # 수정한 부분 - 내 network의 gateway 주소
+         'host': '172.19.0.3', # 수정한 부분 - 내 mysql의 주소
          'port': 3306,
          'user': 'root',
          'password': '',		# 수정한 부분 - mysql 을 empty password 로 했음
@@ -415,7 +415,7 @@
    - 컨테이너 빌드
 
    - ```
-     $ docker run -d -p 15000:6000 --network my-coffee-network --name order_ms jslee6091/flask_order_ms
+     $ docker run -d -p 15000:5000 --network my-coffee-network --name order_ms jslee6091/flask_order_ms
      ```
 
 
@@ -459,7 +459,7 @@
                               consumer_timeout_ms=1000)
      
      config = {
-         'host': '172.19.0.2', # 수정한 부분 - 내 mysql 의 IPv4 주소로 변경
+         'host': '172.19.0.3', # 수정한 부분 - 내 mysql 의 IPv4 주소로 변경
          'port': 3306,
          'user': 'root',
          'password': '', # 비밀 번호 EMPTY 로 했으므로 삭제

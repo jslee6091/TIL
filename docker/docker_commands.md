@@ -248,6 +248,14 @@
 
     - 현재 실행중인 프로세스들을 모두 보여줌
     - `-a`옵션을 추가하면 중지된 프로세스까지 보여줌
+    
+30. ```
+    $ docker run -d -p 23306:3306 --network project_network --name mysql2 -e MYSQL_ALLOW_EMPTY_PASSWORD=true -e LC_ALL=C.UTF-8 mysql:5.7
+    ```
+
+    - 한글 입력이 가능하고 깨짐을 방지하는 docker mysql run 명령어
+    - LC_ALL 을 C.UTF-8로 설정하면 된다.
+    - mysql에 접속해서 `$ locale` 명령어를 통해 C.UTF-8이 있는지 확인해야한다.
 
 
 
@@ -631,3 +639,8 @@ $ ping 127.0.0.1
     $ docker network connect bridge process_name
     ```
 
+- ```
+  $ docker network rm network_name
+  ```
+
+  - docker network 삭제
