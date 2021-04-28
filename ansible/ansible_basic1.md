@@ -1,6 +1,7 @@
 ### Vagrant Ansible
 
 - Vagrantfile로 `$ vagrant up` 실행
+  - Vagrantfile은 강사님 Github 주소 (`https://github.com/joneconsulting/ansible_cloud`)의 master branch에서 clone 받으면 됨
 - 만약 public network에 문제가 생겼을 경우 Vagrantfile에서 public_network 주석처리
 - 설치 중간에 선택하는 사항 생기면 1번 선택
 
