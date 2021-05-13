@@ -49,6 +49,8 @@
    - 원격저장소 주소 저장
    - `git remote set-url origin <url>`
    - 원격저장소 주소 변경
+   - `git remote remove origin`
+   - 원격저장소 연결 삭제
 
 
 
@@ -107,7 +109,15 @@
 1. 충돌
    - 개발 현업에서는 다른 사람들과 깃허브 소스코드를 공유하며 협업을 하게 된다.
    - 이때 동시에 같은 소스를 수정하는 과정에서 충돌(conflict) 가 발생할 수 있다.
-   - 이 경우에는 다른 사람들과 협의를 통해 충돌 문제를 해결해나간다.
+2. 충돌 해결
+   - 충돌을 해결하기 위해서는 우선 본인의 브랜치에 소스를 push 한다.
+   - Github 원격저장소에 가서 pull request를 만든다. 이때 자신의 브랜치를 메인 브랜치와 코드를 합치도록 설정한다.
+   - merge를 위해 코드를 변경한다.
+   - 충돌이 해결되었으면 마무리된다.
+3. 주의사항
+   - 원격저장소의 메인 브랜치 코드가 변경되었을때 이를 pull 받기 위해서는 우선 본인이 로컬에서 변경한 코드를 자신의 브랜치에 먼저 올려야한다.
+   - 그렇지 않고 pull을 받으면 자신이 변경한 코드를 전부 잃어버리게 된다.
+   - 항상 원격저장소의 최신 코드를 로컬에 pull 받아놓도록 하는 것이 좋다.
 
 
 
@@ -126,3 +136,44 @@
 
 - CRUF = CR(Carriage Return), LF(Line Feed)
 
+
+
+
+
+### Github 저장소에 새로운 branch 만들기
+
+1. 로컬에서 branch를 새로 만든다.
+
+   - ```
+     $ git branch my_branch
+     ```
+
+2. 새로 만든 브랜치로 변경한다.
+
+   - ```
+     $ git checkout -b my_branch
+     ```
+
+3. add, commit 한다.
+
+   - ```
+     $ git add .
+     ```
+
+   - ```
+     $ git commit -m "message"
+     ```
+
+4. branch 에 push 한다.
+
+   - ```
+     $ git push origin my_branch
+     ```
+
+   - upstream branch가 없다는 오류가 발생할 때는 `--set-upstream` 옵션을 추가해야한다.
+
+   - ```
+     $ git push --set-upstream origin my_branch
+     ```
+
+   - 보통 처음 push 할때 이런 오류가 발생한다.
