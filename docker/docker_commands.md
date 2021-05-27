@@ -440,6 +440,12 @@ $ docker container exec -it mysql /bin/bash -c mysql -h127.0.0.1 -uroot -p
   
   - build 하기 전에 Dockerfile을 생성해야 한다.
   
+  - 만든 Dockerfile로 이미지 빌드하는 방법
+  
+  - ```
+    $ docker build -t fromtest -f Dockerfile .
+    ```
+  
 - ```
   $ docker run -it fromtest:1.0
   ```
