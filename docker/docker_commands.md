@@ -130,66 +130,6 @@
 
     - container_name 으로 container 지우기
 
-21. ```
-    $ docker run -d -p 3306:3306 -e MYSQL_ALLOW_EMPTY_PASSWORD=true --name mysql mysql:5.7
-    ```
-
-    - `-d`: background 설정
-    - `-p`: port forwarding
-    - `3306(앞부분)`: host port
-    - `3306(뒷부분)`: container port
-    - `-e`: env
-    - `mysql:5.7`: 이미지:Tag
-    - `MYSQL_ALLOW_EMPTY_PASSWORD`: mysql에 접속 시 password 입력을 안해도 됨
-
-    
-
-22. ```
-    $ docker container inspect mysql
-    ```
-
-    - 이름이 mysql인 container의 상세정보를 보여줌
-    - docker 사용시 중요한 정보가 많다.
-
-23. ```
-    $ docker run -d -p 33306:3306 -e MYSQL_RANDOM_ROOT_PASSWORD=true --name mysql_client_rand mysql:5.7
-    ```
-
-    - `MYSQL_RANDOM_ROOT_PASSWORD`: mysql 접속 시 random 하게 생성된 password를 입력해야 함
-
-    - password 확인하는 법 - 1
-
-      > `-d`옵션을 제거한 경우
-
-      - ```
-        $ docker run -p 33306:3306 -e MYSQL_RANDOM_ROOT_PASSWORD=true --name mysql_client_rand mysql:5.7
-        ```
-
-      - `-d` 옵션을 제거한 채로 container 생성하면 container 생성과정이 모두 나오는데 여기에서 중간의 `GENERATED ROOT PASSWORD` 에 password 정보가 있다.
-
-      - 이것을 복사해서 mysql 접속 시 입력하면 됨
-
-    - password 확인하는 법 - 2
-
-      > `-d`옵션을 넣은 경우
-
-      - `-d`옵션을 그대로 입력하여 container 생성한 후 docker log를 확인하면 됨
-
-      - ```
-        $ docker logs container_id
-        ```
-
-      - log를 통해 `-d`옵션을 제거했을 때 보이는 정보들을 확인할 수 있다.
-
-      - 마찬가지로 중간의 `GENERATED ROOT PASSWORD` 를 확인하면 된다.
-
-24. ```
-    $ docker run -d -p 3306:3306 -e MYSQL_ROOT_PASSWORD=secret -e MYSQL_DATABASE=mydb --name mysql mysql:5.7
-    ```
-
-    - 특정 password를 지정하여 mysql 생성
-    - `MYSQL_ROOT_PASSWORD=secret`으로 옵션을 지정하면 이후 mysql에 접속시 password가 secret이 된다.
-
 25. ```
     $ docker container run --volume C:\Users\jslee\Desktop\docker_volume:/var/lib/mysql -d -p 13306:3306 -e MYSQL_ALLOW_EMPTY_PASSWORD=true --name mysql mysql:5.7
     ```
@@ -259,166 +199,54 @@
 
 
 
+### 서로 다른 mysql 컨테이너에 접속하기
 
+> 두 mysql 컨테이너가 실행중이고 같은 도커 네트워크에 연결되어야한다.
 
-### mysql
+- mysql1 의 도커 네트워크 주소 : 172.17.0.1
+- mysql2의 도커 네트워크 주소 : 172.17.0.2
 
-```
-$ mysql -h127.0.0.1 -uroot -p
-```
 
-- mysql 접속
 
+1. 자신의 mysql 데이터베이스에 접속하기
 
+   - ```
+     $ docker exec -it mysql1 /bin/bash
+     $ mysql -h127.0.0.1 -uroot -p
+     ```
 
-```
-show databases;
-```
+   - mysql container에 접속 후 mysql1 자신의 mysql 데이터베이스에 접속한다.
 
-- DB 목록보기
+   - 자신의 DB에 접속할 때는 로컬 호스트를 입력한다. (생략도 가능)
 
+   - mysql 데이터베이스, 테이블 등 DB를 생성하고 조작할 수 있다.
 
 
-```
-create database mydb;
-```
 
-- mydb 이름의 DB 만들기
+2. 서로 다른 mysql 데이터베이스에 접속하기
 
+   - mysql1 컨테이너에서 mysql2 데이터베이스 접속하기
 
+   - ```
+     $ docker exec -it mysql1 /bin/bash
+     $ mysql -h127.0.0.2 -uroot -p
+     ```
 
-```
-drop database mydb;
-```
+   - mysql2의 도커 네트워크 주소인 172.17.0.2 를 입력하여 접속
 
-- mydb 이름의 DB 삭제
+   - mysql2의 DB를 조회할 수 있다.
 
+   - mysql1에서 mysql2 DB로 접속할 때도 주소만 바꿔서 접속하면 가능하다.
 
 
-```
-use mydb;
-```
 
-- mydb 선택
+3. 두 명령어 한번에 실행
 
+   - ```
+     $ docker container exec -it mysql /bin/bash -c mysql -h127.0.0.1 -uroot -p
+     ```
 
-
-```
-show tables;
-```
-
-- 테이블 목록 보기
-
-
-
-```
-create table member(id varchar(20), name varchar(20));
-```
-
-- 테이블 생성
-
-
-
-```
-insert into member(id,name) values('data1','data2');
-```
-
-- 테이블에 데이터 삽입
-
-
-
-```
-select * from member;
-```
-
-- member table의 정보를 모두 선택
-
-
-
-```
-drop table member;
-```
-
-- member table을 삭제
-
-
-
-```
-alter table member change name myname varchar(20);
-```
-
-- member 테이블의 name 칼럼의 이름을 varchar 타입의 myname으로 변경
-
-
-
-```
-select column_name from table_name where column_name2 = data
-```
-
-- `table_name` 테이블에서 `column_name2` 의 데이터가 `data` 인 행의 column 들 중 `column_name` 의 데이터를 추출
-
-
-
-- Port Error Solution
-
-- ```
-  윈도우 검색에 서비스 앱 켜서 MySQL 을 찾아 선택 -> 우클릭 속성 -> 시작 유형(E): (자동 -> 사용안함) -> 서비스 상태 중지
-  ```
-
-
-
-mysql_client
-
-ef5212fa0e - networkid
-
-172.17.0.1 - gateway
-
-172.17.0.3 - ipaddress
-
-
-
-mysql
-
-ef5212fa0e - networkid
-
-172.17.0.1 - gateway
-
-172.17.0.2 - ipaddress
-
-
-
--> gateway 주소와 networkid 주소는 같음을 알 수 있다.
-
-
-
-### mysql 으로 동작시킨 서버에 mysql_client 가 접속하기
-
-
-
-```
-$ docker exec -it mysql /bin/bash
-$ mysql -h127.0.0.1 -uroot -p
-```
-
-- mysql container를 동작시켜 서버를 생성한다.
-- mysql 의 database 를 만들기 위해서는 로컬 주소로 mysql 에 접속하면 된다.
-
-```
-$ docker exec -it mysql_client /bin/bash
-$ mysql -h172.17.0.2 -uroot -p
-```
-
-- mysql_client container를 동작시켜 mysql 서버에 접속한다.
-- 이때 mysql 의 주소는 mysql container의 ipaddress를 입력해야 한다.
-- 즉, mysql container의 ip 주소로 접근하는 것이다. 
-- 그러면 mysql 서버에서 만들었던 database를 확인할 수 있다.
-
-```
-$ docker container exec -it mysql /bin/bash -c mysql -h127.0.0.1 -uroot -p
-```
-
-- 위의 두 명령어를 한번에 실행하기
-- `-c` 옵션을 추가해야함
+   - `-c` 옵션을 추가해야함
 
 
 
