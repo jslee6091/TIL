@@ -130,14 +130,6 @@
 
     - container_name 으로 container 지우기
 
-25. ```
-    $ docker container run --volume C:\Users\jslee\Desktop\docker_volume:/var/lib/mysql -d -p 13306:3306 -e MYSQL_ALLOW_EMPTY_PASSWORD=true --name mysql mysql:5.7
-    ```
-
-    - docker container volume 생성
-    - 로컬의 데이터와 컨테이너가 실시간으로 연동할 수 있다.
-    - 특정 디렉토리 내에서 생성하였다.
-
 26. ```
     $ docker volume ls
     ```
@@ -189,66 +181,6 @@
     - 현재 실행중인 프로세스들을 모두 보여줌
     - `-a`옵션을 추가하면 중지된 프로세스까지 보여줌
     
-30. ```
-    $ docker run -d -p 23306:3306 --network project_network --name mysql2 -e MYSQL_ALLOW_EMPTY_PASSWORD=true -e LC_ALL=C.UTF-8 mysql:5.7
-    ```
-
-    - 한글 입력이 가능하고 깨짐을 방지하는 docker mysql run 명령어
-    - LC_ALL 을 C.UTF-8로 설정하면 된다.
-    - mysql에 접속해서 `$ locale` 명령어를 통해 C.UTF-8이 있는지 확인해야한다.
-
-
-
-### 서로 다른 mysql 컨테이너에 접속하기
-
-> 두 mysql 컨테이너가 실행중이고 같은 도커 네트워크에 연결되어야한다.
-
-- mysql1 의 도커 네트워크 주소 : 172.17.0.1
-- mysql2의 도커 네트워크 주소 : 172.17.0.2
-
-
-
-1. 자신의 mysql 데이터베이스에 접속하기
-
-   - ```
-     $ docker exec -it mysql1 /bin/bash
-     $ mysql -h127.0.0.1 -uroot -p
-     ```
-
-   - mysql container에 접속 후 mysql1 자신의 mysql 데이터베이스에 접속한다.
-
-   - 자신의 DB에 접속할 때는 로컬 호스트를 입력한다. (생략도 가능)
-
-   - mysql 데이터베이스, 테이블 등 DB를 생성하고 조작할 수 있다.
-
-
-
-2. 서로 다른 mysql 데이터베이스에 접속하기
-
-   - mysql1 컨테이너에서 mysql2 데이터베이스 접속하기
-
-   - ```
-     $ docker exec -it mysql1 /bin/bash
-     $ mysql -h127.0.0.2 -uroot -p
-     ```
-
-   - mysql2의 도커 네트워크 주소인 172.17.0.2 를 입력하여 접속
-
-   - mysql2의 DB를 조회할 수 있다.
-
-   - mysql1에서 mysql2 DB로 접속할 때도 주소만 바꿔서 접속하면 가능하다.
-
-
-
-3. 두 명령어 한번에 실행
-
-   - ```
-     $ docker container exec -it mysql /bin/bash -c mysql -h127.0.0.1 -uroot -p
-     ```
-
-   - `-c` 옵션을 추가해야함
-
-
 
 
 
@@ -377,28 +309,6 @@ $ ping 127.0.0.1
 
 
 
-### Dockerfile로 파이썬 실행
-
-- 임의의 python 파일 생성
-
-  - ex) test.py
-
-- Dockerfile 생성 - 파이썬 이미지 다운로드 및 명령어 실행
-
-- build과 run 실행
-
-- test.py 실행
-
-  - ```
-    python test.py
-    ```
-
-- 이미지 파일 내에서 numpy 다운 받기
-  
-  - 해당 container에 접속하여 `pip install numpy`를 실행하면 된다.
-
-
-
 ### Dockerfile에 volume mount 하여 로컬과 연동
 
 - 로컬의 파일을 docker container에도 설치하고 실시간으로 연동하는 과정
@@ -478,3 +388,4 @@ $ ping 127.0.0.1
   ```
 
   - docker network 삭제
+
