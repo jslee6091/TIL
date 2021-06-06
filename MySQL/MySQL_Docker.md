@@ -5,15 +5,14 @@
 1. 비밀번호가 없는 Mysql Docker 컨테이너 생성
 
    - ```
-     $ docker run -d -p 3306:3306 -e MYSQL_ALLOW_EMPTY_PASSWORD=true --name mysql mysql:5.7
+     $ docker run -d -p 13306:3306 -e MYSQL_ALLOW_EMPTY_PASSWORD=true --name mysql mysql:5.7
      ```
 
    - `-d`: background 설정. 없으면 컨테이너가 생성될 때의 log가 모두 명령창에 보여진다.
 
-   - `-p`: port forwarding
-   - `3306(앞부분)`: host port
-   - `3306(뒷부분)`: container port
-   - `-e`: env. 즉, 환경변수 옵션
+   - `-p`: port forwarding 옵션
+   - `13306:3306` : 로컬 또는 host port 번호 13306과 MySQL 컨테이너 port 3306번이 서로 연결되어있다. 즉, MySQL 컨테이너에서 3306번호에서 작동중인 데이터베이스로 로컬에서 연결하려면 13306번 포트를 사용해야한다.
+   - `-e`: 환경변수 옵션
    - `mysql:5.7`: 이미지:Tag
    - `MYSQL_ALLOW_EMPTY_PASSWORD`: mysql에 접속 시 password 없음
 
@@ -155,4 +154,21 @@
      ```
 
    - `-c` 옵션을 추가해야함
+
+
+
+### MySQL Dockerfile 만들기
+
+```dockerfile
+# docker run -d -p 3306:3306 -e MYSQL_ALLOW_EMPTY_PASSWORD=true -e MYSQL_DATABASE=mydb mysql:5.7
+FROM mysql:5.7
+
+ENV MYSQL_ALLOW_EMPTY_PASSWORD true
+ENV MYSQL_DATABASE mydb
+
+COPY docker_volume /var/lib/mysql
+EXPOSE 3306
+
+CMD ["mysqld"]
+```
 
