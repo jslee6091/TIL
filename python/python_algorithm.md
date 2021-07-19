@@ -87,7 +87,26 @@
    dict.get('item', 0)
    ```
 
+4. for문으로 조회
 
+   ```python
+   a = {'e': 3, 'f': 5, 'oif': 'ow', 'fdfs': {3:4, 'o':'ll'}}
+   print(a, type(a)) # output : {'e': 3, 'f': 5, 'oif': 'ow', 'fdfs': {3: 4, 'o': 'll'}} <class 'dict'>
+   print(a['fdfs']['o']) # output : ll
+   
+   for v in a:
+       print(v, a[v])
+   ```
+
+   ```python
+   # output (for loop)
+   e 3
+   f 5
+   oif ow
+   fdfs {3: 4, 'o': 'll'}
+   ```
+
+   - for 문으로 조회하면 각 key에 대하여 value을 조회할 수 있다.
 
 
 
@@ -141,7 +160,7 @@
 - ```python
   list_ex = [list(map(int, list(input())))]
   # 또는
-list_ex = [list(map(int, input()))]
+  list_ex = [list(map(int, input()))]
   ```
   
 - text file에 다음과 같은 2차원 배열이 저장되어있고 이를 입력받아 2차원 리스트를 만드는 코드
@@ -602,3 +621,41 @@ list_ex = [list(map(int, input()))]
 
 
 
+
+
+### union 함수를 이용한 합집합 구하기
+
+- `set` 타입의 함수
+
+- 두 `set` 데이터의 합집합을 출력함
+
+- 리턴 타입도 `set`타입
+
+- ```python
+  s = set()
+  print(s) # output : set()
+  
+  t = {4}
+  print(t, type(t)) # output : {4} <class 'set'>
+  
+  u = t.union(s)
+  v = s.union(t)
+  print('u is ', u, 'and type is ', type(u)) # output : u is  {4} and type is  <class 'set'>
+  print('t is ', t) # output : t is  {4}
+  ```
+
+- 다른 데이터 타입도 합집합이 가능하다.
+
+- ```python
+  a = {13:42} # dictionary
+  w = [1,2,3] # list
+  x = {2,3,4}
+  
+  y = x.union(w) # list 합집합
+  print('y is ', y) # output : y is  {1, 2, 3, 4}
+  
+  z = x.union(a) # dictionary 합집합
+  print('z is ', z) # output : z is  {2, 3, 4, 13}
+  ```
+
+- `dictionary`의 경우 key 값만 합쳐지고 value 값은 합쳐지지 않는다.
