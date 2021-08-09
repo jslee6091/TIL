@@ -53,9 +53,47 @@
     마지막 3자리 : 기타 그룹
     ```
   
-  - 
+- -al 옵션
+
+  - 숨김 파일 또는 디렉터리 까지 보여줌
+
+- -lh 옵션
+
+  - 파일의 용량을 K, M, G 단위로 알기쉽게 표시
 
 
+
+### which
+
+> which <command>
+
+- command가 설치된 디렉터리의 경로를 찾아줌
+
+- ```
+  ex) $ which rmdir
+  /bin/rmdir
+  ```
+
+
+
+### whereis
+
+> whereis <command>
+
+- command가 설치된 경로를 `which`보다 더 자세히 알려줌
+
+  - 실행 파일, 소스 파일, man 페이지 파일 위치 까지
+
+- ```
+  ex) whereis rmdir
+  rmdir: /bin/rmdir /usr/share/man/man2/rmdir.2.gz /usr/share/man/man1/rmdir.1.gz
+  ```
+
+- 옵션
+
+  - -b : 실행 파일(바이너리 파일)만 출력
+  - -m : 매뉴얼 파일만 출력
+  - -s : 소스 파일만 출력
 
 
 
@@ -201,10 +239,28 @@
 
 
 
-### 파일 이름 바꾸기
+### 파일 이름 바꾸기 & 이동
 
 - ```
   $ mv file new_file
   ```
 
   - `file` 이름을 `new_file` 이름으로 바꾸기
+  
+- ```
+  $ mv file /directory
+  ```
+
+  - `file`을 원하는 디렉터리 내부로 이동
+  - 한번에 여러 파일 가능
+
+
+
+### 파일 복사
+
+- ```
+  $ cp file1 file2
+  ```
+
+  - `file1`을 복사해서 `file2`로 만든다.
+  - 원하는 파일 위치를 잘 설정해야 함
